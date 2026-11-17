@@ -1,0 +1,56 @@
+{
+  "description": "Fictional dependency graph (CMDB extract). Edge A -> B means A depends on B.",
+  "nodes": {
+    "online-banking":        {"type": "business_service", "tier": 1},
+    "mobile-app":            {"type": "business_service", "tier": 1},
+    "merchant-payouts":      {"type": "business_service", "tier": 1},
+    "fraud-detection":       {"type": "business_service", "tier": 1},
+    "customer-notifications":{"type": "business_service", "tier": 2},
+    "uat-testing":           {"type": "business_service", "tier": 3},
+
+    "payments-api":          {"type": "application", "tier": 1},
+    "auth-service":          {"type": "application", "tier": 1},
+    "batch-settlement":      {"type": "application", "tier": 1},
+    "fraud-scoring":         {"type": "application", "tier": 1},
+    "notifications":         {"type": "application", "tier": 2},
+    "uat-app":               {"type": "application", "tier": 3},
+
+    "pg-prod-01":            {"type": "server", "tier": 1},
+    "pg-prod-02":            {"type": "server", "tier": 1},
+    "kafka-prod-01":         {"type": "server", "tier": 1},
+    "kafka-prod-02":         {"type": "server", "tier": 1},
+    "kafka-prod-03":         {"type": "server", "tier": 1},
+    "auth-svc-01":           {"type": "server", "tier": 1},
+    "auth-svc-02":           {"type": "server", "tier": 1},
+    "lb-ext-01":             {"type": "server", "tier": 1},
+    "batch-01":              {"type": "server", "tier": 1},
+    "pg-uat-01":             {"type": "server", "tier": 3},
+    "app-uat-01":            {"type": "server", "tier": 3}
+  },
+  "edges": [
+    ["online-banking", "payments-api"],
+    ["online-banking", "auth-service"],
+    ["mobile-app", "payments-api"],
+    ["mobile-app", "auth-service"],
+    ["merchant-payouts", "batch-settlement"],
+    ["fraud-detection", "fraud-scoring"],
+    ["customer-notifications", "notifications"],
+    ["uat-testing", "uat-app"],
+
+    ["payments-api", "pg-prod-01"],
+    ["payments-api", "fraud-scoring"],
+    ["batch-settlement", "pg-prod-01"],
+    ["batch-settlement", "batch-01"],
+    ["fraud-scoring", "kafka-prod-01"],
+    ["fraud-scoring", "kafka-prod-02"],
+    ["fraud-scoring", "kafka-prod-03"],
+    ["notifications", "kafka-prod-01"],
+    ["notifications", "kafka-prod-02"],
+    ["notifications", "kafka-prod-03"],
+    ["auth-service", "auth-svc-01"],
+    ["auth-service", "auth-svc-02"],
+    ["auth-service", "lb-ext-01"],
+    ["uat-app", "pg-uat-01"],
+    ["uat-app", "app-uat-01"]
+  ]
+}

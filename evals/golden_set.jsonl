@@ -1,0 +1,34 @@
+{"id": "R01", "type": "runbook", "question": "What is the rollback for the postgres failover?", "expect_source": "postgres-primary-failover.md", "expect_section": "Rollback"}
+{"id": "R02", "type": "runbook", "question": "How do I rotate the auth certificate?", "expect_source": "auth-service-cert-rotation.md", "expect_section": "Procedure"}
+{"id": "R03", "type": "runbook", "question": "How do I patch the kafka brokers?", "expect_source": "kafka-broker-patching.md", "expect_section": "Procedure"}
+{"id": "R04", "type": "runbook", "question": "What should I check before refreshing UAT?", "expect_source": "test-environment-refresh.md", "expect_section": "Pre-checks"}
+{"id": "R05", "type": "runbook", "question": "How long does the settlement job take?", "expect_source": "batch-settlement-job.md", "expect_section": "Expected duration"}
+{"id": "R06", "type": "runbook", "question": "How do I verify the postgres failover worked?", "expect_source": "postgres-primary-failover.md", "expect_section": "Validation"}
+{"id": "R07", "type": "runbook", "question": "The settlement job failed after the file was transmitted. Should I rerun it?", "expect_source": "batch-settlement-job.md", "expect_section": "Procedure"}
+{"id": "R08", "type": "runbook", "question": "How do I roll back a kafka patch if a broker does not rejoin the cluster?", "expect_source": "kafka-broker-patching.md", "expect_section": "Rollback"}
+{"id": "R09", "type": "runbook", "question": "How much write downtime does payments-api have during a database failover?", "expect_source": "postgres-primary-failover.md", "expect_section": "Expected duration"}
+{"id": "R10", "type": "runbook", "question": "How do I validate that the new auth certificate is live?", "expect_source": "auth-service-cert-rotation.md", "expect_section": "Validation"}
+{"id": "R11", "type": "runbook", "question": "What should I check before patching kafka, like under-replicated partitions?", "expect_source": "kafka-broker-patching.md", "expect_section": "Pre-checks"}
+{"id": "R12", "type": "runbook", "question": "Before a UAT refresh, can unmasked production data be loaded?", "expect_source": "test-environment-refresh.md", "expect_section": "Pre-checks"}
+{"id": "R13", "type": "runbook", "question": "When does the nightly settlement job run and what does it send?", "expect_source": "batch-settlement-job.md", "expect_section": "Purpose"}
+{"id": "G01", "type": "impact", "question": "What breaks if pg-prod-01 goes down?", "expect": ["payments-api", "batch-settlement", "online-banking", "mobile-app", "merchant-payouts"]}
+{"id": "G02", "type": "impact", "question": "What is impacted if kafka-prod-02 goes down?", "expect": ["fraud-scoring", "notifications", "payments-api", "fraud-detection", "customer-notifications", "online-banking", "mobile-app"]}
+{"id": "G03", "type": "impact", "question": "What breaks if auth-svc-01 goes down?", "expect": ["auth-service", "online-banking", "mobile-app"]}
+{"id": "G04", "type": "impact", "question": "Which services are affected if batch-01 is rebooted?", "expect": ["batch-settlement", "merchant-payouts"]}
+{"id": "G05", "type": "impact", "question": "What breaks if pg-uat-01 goes down?", "expect": ["uat-app", "uat-testing"]}
+{"id": "G06", "type": "impact", "question": "What is downstream of lb-ext-01?", "expect": ["auth-service", "online-banking", "mobile-app"]}
+{"id": "G07", "type": "dependencies", "question": "What does payments-api depend on?", "expect": ["pg-prod-01", "fraud-scoring", "kafka-prod-01", "kafka-prod-02", "kafka-prod-03"]}
+{"id": "G08", "type": "dependencies", "question": "What does online-banking depend on?", "expect": ["payments-api", "auth-service", "pg-prod-01", "fraud-scoring", "kafka-prod-01", "kafka-prod-02", "kafka-prod-03", "auth-svc-01", "auth-svc-02", "lb-ext-01"]}
+{"id": "T01", "type": "change_ticket", "question": "Draft a change ticket to patch pg-prod-01 at 02:00", "expect_risk": "High", "expect_blackout": true}
+{"id": "T02", "type": "change_ticket", "question": "Draft a change ticket to patch pg-uat-01", "expect_risk": "Low", "expect_blackout": false}
+{"id": "T03", "type": "change_ticket", "question": "Draft a change ticket to restart notifications", "expect_risk": "Medium", "expect_blackout": false}
+{"id": "T04", "type": "change_ticket", "question": "Draft a change ticket to patch kafka-prod-01 at 14:00", "expect_risk": "High", "expect_blackout": false}
+{"id": "T05", "type": "change_ticket", "question": "Draft a change ticket to reboot app-uat-01 at 02:00", "expect_risk": "Low", "expect_blackout": false}
+{"id": "T06", "type": "change_ticket", "question": "Draft a change ticket to patch batch-01 at 01:15", "expect_risk": "High", "expect_blackout": true}
+{"id": "X01", "type": "refusal", "question": "What breaks if db-legacy-09 goes down?"}
+{"id": "X02", "type": "refusal", "question": "What is the vacation policy for engineers?"}
+{"id": "X03", "type": "refusal", "question": "How do I restart the mainframe CICS region?"}
+{"id": "X04", "type": "refusal", "question": "What is the procedure for a kubernetes upgrade?"}
+{"id": "X05", "type": "refusal", "question": "How do I reset my VPN password?"}
+{"id": "X06", "type": "refusal", "question": "Draft a change ticket for the coffee machine"}
+{"id": "X07", "type": "refusal", "question": "Draft a change ticket to patch web-prod-07"}
